@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Destiny 😈</title>
+
+    <style>
+        body {
+            margin: 0;
+            text-align: center;
+            font-family: Arial;
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(270deg, #ff758c, #ff7eb3, #ffb6c1, #845ec2);
+            background-size: 800% 800%;
+            animation: gradientMove 10s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {background-position: 0%}
+            50% {background-position: 100%}
+            100% {background-position: 0%}
+        }
+
+        .box {
+            margin-top: 120px;
+            background: rgba(0,0,0,0.4);
+            padding: 40px;
+            border-radius: 20px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        #message {
+            margin: 20px 0;
+            font-size: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #yesBtn {
+            background: #ff1e56;
+        }
+
+        #noBtn {
+            background: #333;
+            position: relative;
+        }
+
+        .heart {
+            position: absolute;
+            color: pink;
+            font-size: 20px;
+            animation: float 2s linear;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-200px); opacity: 0; }
+        }
+
+        #angel {
+            display: none;
+            font-size: 60px;
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>🤖 AI Destiny Engine</h1>
+
+    <h2 id="message"> Will you go on date with me 💖😌</h2>
+
+    <button id="yesBtn" onclick="yesClick()">YES💖</button>
+    <button id="noBtn" onclick="noClick()">NO 🤨</button>
+
+    <div id="angel">✨</div>
+</div>
+
+<script>
+
+let noCount = 0;
+let yesSize = 16;
+
+function yesClick() {
+    document.getElementById("message").innerHTML = " You accepted destiny💖";
+
+    // hearts explosion
+    for (let i = 0; i < 80; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 2000);
+    }
+
+    // angel popup
+    document.getElementById("angel").style.display = "block";
+}
+
+function noClick() {
+    noCount++;
+    yesSize += 10;
+
+    document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+    if (noCount === 1) {
+        updateMsg("Are you sure? 😳");
+    } 
+    else if (noCount === 2) {
+        updateMsg("Really your decision? 🥲");
+    } 
+    else if (noCount === 3) {
+        updateMsg("Please… I’ll be sad 🥺");
+    } 
+    else if (noCount === 4) {
+        updateMsg("This is getting embarrassing 😬");
+    } 
+    else {
+        updateMsg("You can’t escape 😈");
+        moveNo();
+    }
+}
+
+function updateMsg(text) {
+    document.getElementById("message").innerHTML = text;
+}
+
+function moveNo() {
+    let btn = document.getElementById("noBtn");
+
+    let x = Math.random() * window.innerWidth * 0.8;
+    let y = Math.random() * window.innerHeight * 0.8;
+
+    btn.style.position = "absolute";
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+</script>
+
+</body>
+</html>
