@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will You Go On A Date With Me? ❤️</title>
+<title>Will You Go On A Date With Me, Sagar? ❤️</title>
 
 <style>
 *{
@@ -14,7 +14,7 @@
 }
 
 body{
-    background:#f47296;
+    background:linear-gradient(135deg,#ff8fab,#f47296);
     height:100vh;
     overflow:hidden;
     display:flex;
@@ -23,7 +23,6 @@ body{
     position:relative;
 }
 
-/* Floating Hearts */
 .hearts{
     position:absolute;
     width:100%;
@@ -34,7 +33,6 @@ body{
 
 .heart{
     position:absolute;
-    font-size:25px;
     animation:float 8s linear infinite;
     opacity:.7;
 }
@@ -51,25 +49,32 @@ body{
 }
 
 .card{
-    width:550px;
+    width:600px;
     max-width:90%;
-    background:#9d4b60;
+    background:rgba(145,61,89,.95);
+    backdrop-filter:blur(10px);
     color:white;
     text-align:center;
-    padding:40px;
+    padding:35px;
     border-radius:25px;
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.cute-gif{
+    width:220px;
+    border-radius:20px;
+    margin-bottom:15px;
 }
 
 .card h1{
-    font-size:42px;
-    margin-bottom:20px;
+    font-size:38px;
+    margin-bottom:15px;
 }
 
 .card p{
-    font-size:26px;
-    margin-bottom:30px;
-    min-height:70px;
+    font-size:24px;
+    min-height:80px;
+    margin-bottom:25px;
 }
 
 #yesBtn{
@@ -78,9 +83,10 @@ body{
     color:white;
     font-size:22px;
     padding:15px 45px;
-    border-radius:12px;
+    border-radius:14px;
     cursor:pointer;
     transition:.3s;
+    font-weight:bold;
 }
 
 #yesBtn:hover{
@@ -89,12 +95,12 @@ body{
 
 #noBtn{
     position:absolute;
-    background:#2c2c2c;
-    color:white;
     border:none;
+    background:#333;
+    color:white;
     font-size:20px;
-    padding:15px 30px;
-    border-radius:12px;
+    padding:15px 25px;
+    border-radius:14px;
     cursor:pointer;
     transition:.15s;
 }
@@ -104,18 +110,19 @@ body{
 }
 
 .success h1{
-    font-size:60px;
+    font-size:55px;
     margin-bottom:20px;
 }
 
 .success p{
-    font-size:30px;
+    font-size:28px;
+    line-height:1.5;
 }
 
 .confetti{
     position:absolute;
-    width:10px;
-    height:10px;
+    width:12px;
+    height:12px;
     animation:fall 4s linear forwards;
 }
 
@@ -133,11 +140,16 @@ body{
 
 <div class="hearts"></div>
 
-<div class="card" id="card">
+<div class="card">
 
     <div id="proposal">
 
-        <h1>💖 Will You Go On A Date With Me?</h1>
+        <img
+        src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"
+        class="cute-gif"
+        alt="Cute Cat">
+
+        <h1>💖 Will You Go On A Date With Me, Sagar? 💖</h1>
 
         <p id="message">
             I promise it'll be fun ❤️
@@ -151,19 +163,22 @@ body{
 
     <div class="success" id="success">
 
-        <h1>🎉 YAYYYY! 🎉</h1>
+        <h1>🥳 YAYYYYY ❤️</h1>
 
         <p>
-            Date Confirmed ❤️🥰
+            You said YES!! 💕<br><br>
+
+            Now get ready for the cutest date ever 🌹🥰✨
             <br><br>
-            Best decision ever!
+
+            Can't wait ❤️
         </p>
 
     </div>
 
 </div>
 
-<button id="noBtn">NO 🙄</button>
+<button id="noBtn">NO 🙈</button>
 
 <script>
 
@@ -173,26 +188,27 @@ const message = document.getElementById("message");
 
 const messages = [
     "Please say yes 🥺",
-    "Come on... just one date ❤️",
     "Pretty please? 💕",
+    "Just one date 👉👈",
     "I'll cry 😭",
-    "You're making this difficult 😅",
-    "My heart can't take this 💔",
-    "This is getting embarrassing 😳",
-    "The NO button is broken anyway 🤭",
-    "You know you want to 😏",
-    "JUST CLICK YES ❤️"
+    "Look at the cat... even it wants you to say yes 🐱❤️",
+    "Don't break my heart 💔",
+    "You're making me nervous 😳",
+    "Pleaseeeee Sagar 🥹",
+    "I'm literally begging now 🙏😭",
+    "My heart can't take this 😭💔",
+    "Last chance... 🥺",
+    "Okay fine... I'm disappearing 😔"
 ];
 
 let count = 0;
 
-/* Initial NO position */
 moveNoButton();
 
 function moveNoButton(){
 
-    const maxX = window.innerWidth - 140;
-    const maxY = window.innerHeight - 80;
+    const maxX = window.innerWidth - 150;
+    const maxY = window.innerHeight - 100;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
@@ -203,29 +219,31 @@ function moveNoButton(){
 
 function dodgeNo(){
 
-    moveNoButton();
-
     if(count < messages.length){
         message.innerHTML = messages[count];
-    }else{
-        message.innerHTML =
-        "Why are you still trying to click NO? 😂";
     }
 
     count++;
 
+    moveNoButton();
+
     let current =
-        parseFloat(
-            window.getComputedStyle(yesBtn)
-            .fontSize
-        );
+    parseFloat(window.getComputedStyle(yesBtn).fontSize);
 
     yesBtn.style.fontSize =
-        (current + 4) + "px";
+    (current + 4) + "px";
 
     yesBtn.style.padding =
-        (15 + count * 2) + "px " +
-        (45 + count * 5) + "px";
+    (15 + count * 2) + "px " +
+    (45 + count * 5) + "px";
+
+    if(count >= messages.length){
+
+        noBtn.style.display = "none";
+
+        message.innerHTML =
+        "The NO button resigned from its job 😌❤️";
+    }
 }
 
 noBtn.addEventListener("mouseover", dodgeNo);
@@ -235,6 +253,7 @@ yesBtn.addEventListener("click", ()=>{
 
     document.getElementById("proposal").style.display="none";
     document.getElementById("success").style.display="block";
+
     noBtn.style.display="none";
 
     createConfetti();
@@ -242,21 +261,21 @@ yesBtn.addEventListener("click", ()=>{
 
 function createConfetti(){
 
-    for(let i=0;i<150;i++){
+    for(let i=0;i<200;i++){
 
         const confetti =
-            document.createElement("div");
+        document.createElement("div");
 
         confetti.classList.add("confetti");
 
         confetti.style.left =
-            Math.random()*100+"vw";
+        Math.random()*100+"vw";
 
         confetti.style.background =
-            `hsl(${Math.random()*360},100%,50%)`;
+        `hsl(${Math.random()*360},100%,50%)`;
 
         confetti.style.animationDuration =
-            (Math.random()*3+2)+"s";
+        (Math.random()*3+2)+"s";
 
         document.body.appendChild(confetti);
 
@@ -266,26 +285,27 @@ function createConfetti(){
     }
 }
 
-/* Floating hearts */
 const heartsContainer =
 document.querySelector(".hearts");
 
 setInterval(()=>{
 
     const heart =
-        document.createElement("div");
+    document.createElement("div");
 
     heart.classList.add("heart");
-    heart.innerHTML = "❤️";
+
+    heart.innerHTML =
+    Math.random() > 0.5 ? "❤️" : "💕";
 
     heart.style.left =
-        Math.random()*100+"vw";
+    Math.random()*100+"vw";
 
     heart.style.fontSize =
-        (Math.random()*25+15)+"px";
+    (Math.random()*25+15)+"px";
 
     heart.style.animationDuration =
-        (Math.random()*4+5)+"s";
+    (Math.random()*4+5)+"s";
 
     heartsContainer.appendChild(heart);
 
@@ -293,7 +313,7 @@ setInterval(()=>{
         heart.remove();
     },9000);
 
-},500);
+},400);
 
 </script>
 
